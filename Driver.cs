@@ -7,7 +7,16 @@ namespace BB84Simulation
     {
         static void Main(string[] args)
         {
+            using (var sim = new QuantumSimulator())
+            {
+                var res = BB84.Run(sim).Result;
+                var (AliceKey, BobKey) = res;
+                System.Console.WriteLine($"AliceKey: {AliceKey}");
+                System.Console.WriteLine($"BobKey:   {BobKey}");
+            }
 
+            System.Console.WriteLine("\n\nPress Enter to continue...\n\n");
+            System.Console.ReadLine();
         }
     }
 }
