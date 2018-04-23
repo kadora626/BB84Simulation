@@ -40,9 +40,12 @@
                 if (Eavasdropper) {
                     for (idx in 0..BitLength -1) {
                         if (RandomInt(2) == 0) {
-                            X(register[idx]);
+                            H(register[idx]);
+                            set EveBits[idx] = M(register[idx]) == One;
+                            H(register[idx]);
+                        } else {
+                            set EveBits[idx] = M(register[idx]) == One;
                         }
-                        set EveBits[idx] = M(register[idx]) == One;
                     }
                 }
                 // Choose Bob's bases and measurement Qubits

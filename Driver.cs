@@ -57,11 +57,11 @@ namespace BB84Simulation
 
             // Pattern with eavasdropper
             System.Console.WriteLine("PART2:");
-            var Steps = 100;
+            var Steps = 1000;
             var CountEavesdrop = 0;
             var CountNonEavesdrop = 0;
             for (int step = 0; step < Steps; step++) {
-                System.Console.WriteLine($"STEP-{Step}");
+                System.Console.WriteLine($"STEP-{step}");
                 if(SimulateBB84(KeyLength,CheckLength,StepBits,true)){
                     CountEavesdrop++;
                 } else {
