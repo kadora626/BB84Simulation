@@ -26,6 +26,7 @@
                     // Choose Alice's bits and bases
                     set AliceBits[idx] = (RandomInt(2) == 0);
                     set AliceBases[idx] = (RandomInt(2) == 0);
+
                     // Prepare Qubits by using Alice's bits and bases
                     if (AliceBits[idx]) {
                         X(register[idx]);

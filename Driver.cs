@@ -13,6 +13,8 @@ namespace BB84Simulation
                 var BobKey = "";
                 var EveKey = "";
                 var EavesdropMessage = "WARNING!! There is an eavesdropper.";
+
+                // Execute BB84 protocol until earn needed length bits
                 while (AliceKey.Length < KeyLength + CheckLength){
                     var res = BB84.Run(sim, StepBits, Eavesdropper).Result;
                     var (AliceReceives, BobReceives, EveReceives) = res;
@@ -20,12 +22,16 @@ namespace BB84Simulation
                     BobKey = BobKey + BobReceives;
                     EveKey = EveKey + EveReceives;
                 }
+
+                // Checks if there is an eavesdropper
                 var AliceCheckBits = AliceKey.Substring(KeyLength, CheckLength);
                 var BobCheckBits = BobKey.Substring(KeyLength, CheckLength);
                 if (AliceCheckBits == BobCheckBits) {
                     EavesdropMessage = "There is no eavesdropper.";
                     result = false;
                 }
+
+                // Write results
                 System.Console.WriteLine(EavesdropMessage);
                 System.Console.WriteLine($"AliceKey:       {AliceKey.Substring(0,KeyLength)}");
                 System.Console.WriteLine($"BobKey:         {BobKey.Substring(0,KeyLength)}");
@@ -44,6 +50,7 @@ namespace BB84Simulation
             var KeyLength = 5;
             var CheckLength = 5;
             var StepBits = 10;
+
             // Pattern with no eavasdropper
             System.Console.WriteLine("PART1:");
             SimulateBB84(KeyLength,CheckLength,StepBits,false);
@@ -62,6 +69,7 @@ namespace BB84Simulation
                 }
             }
             System.Console.WriteLine($"Total:{Steps}, Eavesdrop:{CountEavesdrop}, NoEavesdrop:{CountNonEavesdrop}");
+
             System.Console.WriteLine("Press Enter to continue...\n\n");
             System.Console.ReadLine();
         }
